@@ -1,0 +1,70 @@
+CREATE TABLE IF NOT EXISTS product_category (
+  id BIGserial NOT NULL ,
+  category_name VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (id));
+
+
+CREATE TABLE IF NOT EXISTS product (
+   id  BIGserial NOT NULL ,
+   sku  VARCHAR(255) DEFAULT NULL,
+   name  VARCHAR(255) DEFAULT NULL,
+   description  VARCHAR(255) DEFAULT NULL,
+   unit_price  DECIMAL(13,2) DEFAULT NULL,
+   image_url  VARCHAR(255) DEFAULT NULL,
+   active  Boolean,
+   units_in_stock  BIGINT DEFAULT NULL,
+    date_created  timestamp DEFAULT NULL,
+   last_updated  timestamp DEFAULT NULL,
+   category_id  BIGINT NOT NULL,
+  PRIMARY KEY ( id ),
+  CONSTRAINT  fk_category  FOREIGN KEY ( category_id ) REFERENCES  product_category  ( id )
+
+
+INSERT INTO product_category(category_name) VALUES ('BOOKS');
+
+INSERT INTO product (sku, name, description, image_url, active, units_in_stock,
+unit_price, category_id, date_created)
+VALUES ('BOOK-TECH-1000', 'JavaScript - The Fun Parts', 'Learn JavaScript',
+'assets/images/products/placeholder.png'
+,'1',100,19.99,1, NOW());
+
+INSERT INTO product (sku, name, description, image_url, active, units_in_stock,
+unit_price, category_id, date_created)
+VALUES ('BOOK-TECH-1001', 'Spring Framework Tutorial', 'Learn Spring',
+'assets/images/products/placeholder.png'
+,'1',100,29.99,1, NOW());
+
+INSERT INTO product (sku, name, description, image_url, active, units_in_stock,
+unit_price, category_id, date_created)
+VALUES ('BOOK-TECH-1002', 'Kubernetes - Deploying Containers', 'Learn Kubernetes',
+'assets/images/products/placeholder.png'
+,'1',100,24.99,1, NOW());
+
+INSERT INTO product (sku, name, description, image_url, active, units_in_stock,
+unit_price, category_id, date_created)
+VALUES ('BOOK-TECH-1003', 'Internet of Things (IoT) - Getting Started', 'Learn IoT',
+'assets/images/products/placeholder.png'
+,'1',100,29.99,1, NOW());
+
+INSERT INTO product (sku, name, description, image_url, active, units_in_stock,
+unit_price, category_id, date_created)
+VALUES ('BOOK-TECH-1004', 'The Go Programming Language: A to Z', 'Learn Go',
+'assets/images/products/placeholder.png'
+,'1',100,24.99,1, NOW());
+
+CREATE TABLE country (
+  id BIGserial NOT NULL,
+  code varchar(255) DEFAULT NULL,
+  name varchar(255) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE state (
+  id bigserial NOT NULL,
+  name varchar(255) DEFAULT NULL,
+  country_id bigint NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT country_id FOREIGN KEY (country_id) REFERENCES country (id));
+  
+  
+  
